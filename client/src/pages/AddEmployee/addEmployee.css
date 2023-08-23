@@ -1,0 +1,63 @@
+.addEmployee {
+  display: flex;
+}
+.column {
+  flex: 1;
+  /* padding: 60px 10px 20px 40px; */
+  /* border: 1px black solid; */
+  margin-left: auto;
+  margin-right: auto;
+  height: 740px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.addEmployee-form {
+  width: 100%;
+
+  display: flex;
+  padding: 50px;
+  justify-content: space-around;
+}
+
+.addEmployee-form label,
+.addEmployee-form input {
+  width: 60%;
+}
+
+.addEmployee-form label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.addEmployee-form input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.addEmployee-form input:focus {
+  outline: none;
+  border-color: #253d90;
+}
+
+.addEmployee-form label.login-label {
+  color: #253d90;
+}
+
+.add-btn {
+  cursor: pointer;
+  height: 40px;
+  width: 40%;
+  margin-top: 70px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+}

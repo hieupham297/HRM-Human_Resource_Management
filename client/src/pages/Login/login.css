@@ -1,0 +1,97 @@
+.login-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+h1 {
+  color: #253d90;
+}
+h4 {
+  color: grey;
+}
+.login-box {
+  display: inline-block;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px;
+  position: relative;
+  z-index: 2;
+}
+.ads {
+  flex: 1;
+  position: relative;
+  background-image: url("../../assets/employment_agreement.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.ads::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+  opacity: 0.6;
+  z-index: 1;
+}
+label {
+  display: block;
+}
+.login-label {
+  font-size: 16px;
+  color: #253d90;
+  font-weight: bold;
+}
+.login-input {
+  display: block;
+  height: 30px;
+  width: 100%;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px #cbb4b4 solid;
+  font-size: 16px;
+  padding: 5px;
+}
+.remember {
+  display: flex;
+  justify-content: space-between;
+}
+.login-label > a {
+  text-decoration: none;
+  color: #253d90;
+  cursor: pointer;
+}
+.btn-login {
+  display: block;
+  background-color: #253d90;
+  height: 40px;
+  width: 70%;
+  color: white;
+  font-size: 16px;
+  margin-top: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+p {
+  text-align: center;
+}
+.title {
+  position: absolute;
+  top: 65%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: white;
+  z-index: 2;
+}
+.logo-white {
+  margin-bottom: 200px;
+}

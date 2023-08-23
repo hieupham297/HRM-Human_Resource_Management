@@ -1,0 +1,91 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState } from "react";
+import "./login.css";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+export const Login = () => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const loginData = { userName, password };
+    try {
+      axios.post("http://localhost:5000/user/login", loginData).then((res) => {
+        if (res.data.status === "Sucessful") {
+          let userData = res.data.userData;
+          console.log(res.data.userData, res.data.token);
+          Cookies.set("userData", JSON.stringify(userData), {
+            expires: 1,
+          });
+          Cookies.set("token", res.data.token)
+          window.location.href = "/homepage";
+        }
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+
+  return (
+    <div className="login-container">
+      <form className="login-box">
+        <h1
+          className="logo-white"
+          style={{ color: "#253d90", fontSize: "35px" }}
+        >
+          HR-<span style={{ color: "#FFC20E" }}>Manage</span>
+        </h1>
+        <h1>LOGIN</h1>
+        <h4>Login to your account</h4>
+
+        <label className="login-label">Username</label>
+        <input
+          type="text"
+          className="login-input"
+          placeholder="Enter username ..."
+          required
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        <label className="login-label">Password</label>
+        <input
+          type="password"
+          className="login-input"
+          placeholder="Enter password ..."
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <div className="remember">
+          <div>
+            <input type="checkbox" />
+            <span>Remember me</span>
+          </div>
+          <span className="login-label">
+            <a>Forgot Password?</a>
+          </span>
+        </div>
+        <div className="wrapper">
+          <button className="btn-login" onClick={handleLogin}>
+            Sign In
+          </button>
+        </div>
+
+        <p>
+          Do you have an account yet?{" "}
+          <span className="login-label">
+            <a href="/register">Create account</a>
+          </span>{" "}
+        </p>
+      </form>
+      <div className="ads">
+        <h1 className="title">
+          Manage all <span style={{ color: "#FFC20E" }}>HR Operations</span>{" "}
+          from the comfort of your home{" "}
+        </h1>
+      </div>
+    </div>
+  );
+};
