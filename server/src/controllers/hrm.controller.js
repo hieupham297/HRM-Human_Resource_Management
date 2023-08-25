@@ -71,68 +71,32 @@ const updateEmployee = async (req, res) => {
       startDate,
     } = req.body;
 
-    console.log(req.body);
-
     const existedEmployee = await db.query(
       "SELECT * FROM employees WHERE employeeCode = $1",
       [employeeCode]
     );
     if (existedEmployee.rows.length === 0) {
-      return res.status(400).json({ message: "Not Found Employee" });
+      return res.json({ status: "Error", message: "Not Found Employee" });
     }
 
-    let updateFields = [];
-    let updateValues = [employeeCode];
-
-    if (fullName !== null) {
-      updateFields.push("fullName = $2");
-      updateValues.push(fullName);
-    }
-    if (dob !== null) {
-      updateFields.push("dob = $3::date");
-      updateValues.push(dob);
-    }
-    if (gender !== null) {
-      updateFields.push("gender = $4");
-      updateValues.push(gender);
-    }
-    if (hometown !== null) {
-      updateFields.push("hometown = $5");
-      updateValues.push(hometown);
-    }
-    if (email !== null) {
-      updateFields.push("email = $6");
-      updateValues.push(email);
-    }
-    if (phoneNumber !== null) {
-      updateFields.push("phoneNumber = $7");
-      updateValues.push(phoneNumber);
-    }
-    if (jobCategory !== null) {
-      updateFields.push("jobCategory = $8");
-      updateValues.push(jobCategory);
-    }
-    if (jobTitle !== null) {
-      updateFields.push("jobTitle = $9");
-      updateValues.push(jobTitle);
-    }
-    if (startDate !== null) {
-      updateFields.push("startDate = $10::date");
-      updateValues.push(startDate);
-    }
-
-    if (updateFields.length > 0) {
-      const updateQuery = [
-        "UPDATE employees SET",
-        updateFields.join(", "),
-        "WHERE employeeCode = $1",
-      ].join(" ");
-
-      db.query(updateQuery, updateValues);
-    }
+    await db.query(
+      "UPDATE employees SET employeecode = $1, fullname = $2, dob = $3, gender = $4, hometown = $5 ,email = $6, phonenumber = $7, jobcategory = $8, jobtitle = $9, startdate = $10 WHERE employeeCode = $1",
+      [
+        employeeCode,
+        fullName,
+        dob,
+        gender,
+        hometown,
+        email,
+        phoneNumber,
+        jobCategory,
+        jobTitle,
+        startDate,
+      ]
+    );
     res.send({
       status: "Sucessful",
-      message: "Update employee successfully",
+      message: "Update profile successfully",
     });
   } catch (error) {
     console.log(error);

@@ -5,7 +5,7 @@ import { Searchbar } from "../../components/Searchbar/searchbar";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { UpdateModal } from "../../components/UpdateModal/updateModal";
-import { formatDate } from "../../utils/utils";
+import { formatDate } from "../../utils/formatDate";
 
 export const Homepage = () => {
   const [employees, setEmployees] = useState([]);
@@ -25,7 +25,6 @@ export const Homepage = () => {
 
   useEffect(() => {
     let storedUserData = Cookies.get("userData");
-    console.log(storedUserData, JSON.parse(storedUserData));
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
     }
@@ -63,16 +62,16 @@ export const Homepage = () => {
           </thead>
           <tbody>
             {employees.map((employee, index) => (
-              <tr key={employee.id}>
+              <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{employee.employeecode}</td>
-                <td>{employee.fullname}</td>
+                <td style={{ textAlign: "left" }}>{employee.employeecode}</td>
+                <td style={{ textAlign: "left" }}>{employee.fullname}</td>
                 <td>{formatDate(employee.dob)}</td>
-                <td>{employee.gender}</td>
-                <td>{employee.hometown}</td>
+                <td style={{ textAlign: "left" }}>{employee.gender}</td>
+                <td style={{ textAlign: "left" }}>{employee.hometown}</td>
                 <td>{formatDate(employee.startdate)}</td>
-                <td>{employee.jobtitle}</td>
-                <td>{employee.jobcategory}</td>
+                <td style={{ textAlign: "left" }}>{employee.jobtitle}</td>
+                <td style={{ textAlign: "left" }}>{employee.jobcategory}</td>
                 <td>
                   <i
                     className="fa-regular fa-pen-to-square icon"
