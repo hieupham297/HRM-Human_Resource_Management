@@ -32,7 +32,7 @@ export const Homepage = () => {
 
   const handleDelete = (employeeCode) => {
     axios
-      .delete(`http://localhost:5000/hrm/deleteEmployee/${employeeCode}`)
+      .put(`http://localhost:5000/hrm/deleteEmployee/${employeeCode}`)
       .then((res) => {
         window.alert("Delete sucessfully");
         window.location.reload();

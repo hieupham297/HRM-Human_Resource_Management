@@ -16,7 +16,7 @@
 .statistical-content > table > thead > tr > th,
 .statistical-content > table > tbody > tr > td {
   border: 1px solid #ddd;
-  padding: 20px;
+  padding: 12px 25px;
   text-align: center;
 }
 

@@ -2,7 +2,9 @@ const db = require("../database/db");
 
 const getAllEmployees = async (req, res) => {
   try {
-    const employeeList = await db.query("SELECT * FROM employees");
+    const employeeList = await db.query(
+      "SELECT * FROM employees WHERE isactive = true"
+    );
     res.send({ status: "Sucessful", data: employeeList.rows });
   } catch (error) {
     console.log(error);
@@ -33,7 +35,7 @@ const addNewEmployee = async (req, res) => {
     }
 
     db.query(
-      "INSERT INTO employees (employeeCode, fullName, dob, gender, hometown, email, phoneNumber, jobCategory, jobTitle, startDate) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
+      "INSERT INTO employees (employeeCode, fullName, dob, gender, hometown, email, phoneNumber, jobCategory, jobTitle, startDate, isActive) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, true)",
       [
         employeeCode,
         fullName,
@@ -112,16 +114,18 @@ const deleteEmployee = async (req, res) => {
       [employeeCode]
     );
     if (existedEmployee.rows.length === 0) {
-      return res.status(404).json({
+      return res.json({
         status: "Error",
         message: "Employee not found",
       });
     }
 
-    db.query("DELETE FROM employees WHERE employeeCode = $1", [employeeCode]);
+    db.query("UPDATE employees SET isActive = false WHERE employeeCode = $1", [
+      employeeCode,
+    ]);
     return res
       .status(200)
-      .json({ status: "Sucessfully", message: "Delete employee successfully" });
+      .json({ status: "Sucessful", message: "Delete employee successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).send({ status: error, message: "Internal Server Error" });
