@@ -12,16 +12,22 @@ export const Homepage = () => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [userData, setUserData] = useState(null);
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/hrm/getAllEmployees")
+      .get(`http://localhost:5000/hrm/search?name=${searchName}`)
       .then((res) => {
-        setEmployees(res.data.data);
-        setDataLoaded(true);
+        if (res.data.status === "Sucessful") {
+          setEmployees(res.data.data);
+          setDataLoaded(true);
+          console.log(searchName);
+        } else if (res.data.status === "Error") {
+          setEmployees([]);
+        }
       })
       .then((err) => console.log(err));
-  }, []);
+  }, [searchName]);
 
   useEffect(() => {
     let storedUserData = Cookies.get("userData");
@@ -44,7 +50,7 @@ export const Homepage = () => {
     <div className="homepage-content">
       <Sidebar data={userData} dataLoaded={dataLoaded} />
       <div className="statistical-content">
-        <Searchbar />
+        <Searchbar setSearchName={setSearchName} />
         <table>
           <thead>
             <tr>

@@ -132,9 +132,30 @@ const deleteEmployee = async (req, res) => {
   }
 };
 
+const searchEmployee = async (req, res) => {
+  try {
+    const { name } = req.query;
+
+    const result = await db.query(
+      "SELECT * FROM employees WHERE isactive = true AND fullname ILIKE $1",
+      [`%${name}%`]
+    );
+
+    if (result.rows.length > 0) {
+      res.send({ status: "Sucessful", data: result.rows });
+    } else {
+      res.send({ status: "Error", message: "Employee not found!" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error!" });
+  }
+};
+
 module.exports = {
   getAllEmployees,
   addNewEmployee,
   updateEmployee,
   deleteEmployee,
+  searchEmployee,
 };

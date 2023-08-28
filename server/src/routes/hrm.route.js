@@ -8,4 +8,6 @@ router.get("/getAllEmployees", hrmController.getAllEmployees);
 router.put("/updateEmployee/:employeeCode", hrmController.updateEmployee);
 router.put("/deleteEmployee/:employeeCode", hrmController.deleteEmployee);
 
+router.get("/search", hrmController.searchEmployee);
+
 module.exports = router;
