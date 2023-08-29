@@ -1,0 +1,33 @@
+.select-label {
+  color: black;
+  font-weight: 500;
+  font-size: 16px;
+  padding-right: 5px;
+}
+
+.select-main {
+  font-size: 15px;
+  color: black;
+  border-radius: 0.4rem;
+  border: black solid 1px;
+  padding: 5px 10px;
+  background-color: transparent;
+  width: fit-content;
+  min-width: 5rem;
+  height: 38px;
+  cursor: pointer;
+}
+
+.select-main:focus {
+  outline: 0;
+}
+
+.option {
+  border: #3f5ca8 solid 2px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.option:focus {
+  border: #3f5ca8 solid 2px;
+}

@@ -1,5 +1,6 @@
 const db = require("../database/db");
 
+// Thêm, sửa, xóa data
 const getAllEmployees = async (req, res) => {
   try {
     const employeeList = await db.query(
@@ -8,7 +9,7 @@ const getAllEmployees = async (req, res) => {
     res.send({ status: "Sucessful", data: employeeList.rows });
   } catch (error) {
     console.log(error);
-    res.send({ status: "Failed" });
+    res.send({ status: "Error" });
   }
 };
 const addNewEmployee = async (req, res) => {
@@ -132,6 +133,7 @@ const deleteEmployee = async (req, res) => {
   }
 };
 
+// API tìm kiếm
 const searchEmployee = async (req, res) => {
   try {
     const { name } = req.query;
@@ -152,10 +154,54 @@ const searchEmployee = async (req, res) => {
   }
 };
 
+// API filter
+const getByHometown = async (req, res) => {
+  const { hometown } = req.params;
+  try {
+    const employeeList = await db.query(
+      "SELECT * FROM employees WHERE isactive = true AND hometown = $1",
+      [hometown]
+    );
+    res.send({ status: "Sucessful", data: employeeList.rows });
+  } catch (error) {
+    console.log(error);
+    res.send({ status: "Error", message: error });
+  }
+};
+const getByJobCategory = async (req, res) => {
+  const { jobCategory } = req.params;
+  try {
+    const employeeList = await db.query(
+      "SELECT * FROM employees WHERE isactive = true AND jobcategory = $1",
+      [jobCategory]
+    );
+    res.send({ status: "Sucessful", data: employeeList.rows });
+  } catch (error) {
+    console.log(error);
+    res.send({ status: "Error", message: error });
+  }
+};
+const getByJobTitle = async (req, res) => {
+  const { jobTitle } = req.params;
+  try {
+    const employeeList = await db.query(
+      "SELECT * FROM employees WHERE isactive = true AND jobtitle = $1",
+      [jobTitle]
+    );
+    res.send({ status: "Sucessful", data: employeeList.rows });
+  } catch (error) {
+    console.log(error);
+    res.send({ status: "Error", message: error });
+  }
+};
+
 module.exports = {
   getAllEmployees,
   addNewEmployee,
   updateEmployee,
   deleteEmployee,
   searchEmployee,
+  getByHometown,
+  getByJobCategory,
+  getByJobTitle,
 };

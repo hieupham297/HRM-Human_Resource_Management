@@ -1,11 +1,11 @@
 .sidebar {
   width: 20%;
   height: 100vh;
-  background-color: #0f2b8f;
+  background-color: #121c3e;
   padding-left: 20px;
 }
 .menu {
-  height: 450px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -24,9 +24,27 @@
 .sidebar-stack {
   display: block;
   color: white;
+  font-weight: 500;
   margin-left: 20px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  height: 45px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
-.sidebar-stack > a {
+.sidebar-stack:hover {
+  background-color: #ffc20e;
+  color: black;
+}
+.sidebar-stack:hover > .sidebar-stack-main > a {
+  color: black;
+}
+.sidebar-stack-main {
+  padding-left: 20px;
+}
+.sidebar-stack-main > a {
   text-decoration: none;
   color: white;
   cursor: pointer;
