@@ -67,28 +67,6 @@ export const Homepage = () => {
       })
       .catch((err) => console.log(err));
   };
-  // const handleFilter = (selectedValue) => {
-  //   if (typeSelection === "All employees") {
-  //     axios
-  //       .get(`http://localhost:5000/hrm/search?name=${searchName}`)
-  //       .then((res) => {
-  //         if (res.data.status === "Sucessful") {
-  //           setEmployees(res.data.data);
-  //           setDataLoaded(true);
-  //           console.log(searchName);
-  //         } else if (res.data.status === "Error") {
-  //           setEmployees([]);
-  //         }
-  //       })
-  //       .then((err) => console.log(err));
-  //   } else if (typeSelection === "Hometown") {
-  //     fetchByHometown();
-  //   } else if (typeSelection === "Job category") {
-  //     fetchByJobCategory();
-  //   } else if (typeSelection === "Job title") {
-  //     fetchByJobTitle();
-  //   }
-  // };
 
   // filter functions
   const fetchByHometown = (hometown) => {
@@ -117,7 +95,7 @@ export const Homepage = () => {
   };
   const fetchByJobTitle = (jobTitle) => {
     axios
-      .get(`http://localhost:5000/hrm/getByHometown/${jobTitle}`)
+      .get(`http://localhost:5000/hrm/getByJobTitle/${jobTitle}`)
       .then((res) => {
         if (res.data.status === "Sucessful") {
           setEmployees(res.data.data);

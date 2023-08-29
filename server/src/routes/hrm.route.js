@@ -16,4 +16,7 @@ router.get("/search", hrmController.searchEmployee);
 router.get("/getByHometown/:hometown", hrmController.getByHometown);
 router.get("/getByJobCategory/:jobCategory", hrmController.getByJobCategory);
 router.get("/getByJobTitle/:jobTitle", hrmController.getByJobTitle);
+
+// Pagnition
+router.get("/employeePagnition", hrmController.employeePagnition);
 module.exports = router;

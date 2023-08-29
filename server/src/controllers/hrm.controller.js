@@ -195,6 +195,36 @@ const getByJobTitle = async (req, res) => {
   }
 };
 
+// API pagnition
+const employeePagnition = async (req, res) => {
+  try {
+    const page = parseInt(req.query) || 1; // nếu không có giá trị, mặc định page = 1
+    const PAGE_SIZE = 10;
+
+    const offset = (page - 1) * PAGE_SIZE;
+
+    const employeeList = await db.query(
+      "SELECT * FROM employees WHERE isactive = true LIMIT $1 OFFSET $2",
+      [PAGE_SIZE, offset]
+    );
+
+    const allEmployees = await db.query(
+      "SELECT COUNT(*) FROM employees WHERE isactive = true"
+    );
+    const total_pages = Math.ceil(allEmployees.rows[0].count / PAGE_SIZE);
+    res.send({
+      stastus: "Sucessful",
+      data: employeeList.rows,
+      total_pages,
+      currentPage: page,
+      totalEmployees: allEmployees.rows[0].count,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send({ status: "Error", message: "Failed to load data" });
+  }
+};
+
 module.exports = {
   getAllEmployees,
   addNewEmployee,
@@ -204,4 +234,5 @@ module.exports = {
   getByHometown,
   getByJobCategory,
   getByJobTitle,
+  employeePagnition,
 };
